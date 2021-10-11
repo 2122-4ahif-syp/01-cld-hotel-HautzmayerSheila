@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+class Hotelzimmer{
+    -zimmer_id: int
+    -personen: int
+    -raumpfleger:Raumpfleger
+}
+
+class Kategorie{
+    -kategorie_id: int
+    -bezeichnung: string
+}
+
+class Mitarbeiter{
+    -svnr: int
+    -name: string
+    -adresse: string
+}
+
+class Raumpfleger{
+
+}
+
+class Betreuer{
+    -fachgebiet: Fachgebiet
+}
+
+class Fachgebiet{
+
+}
+
+class Gast{
+    -kundennr: int
+    -name: string
+    -adresse: string
+}
+
+class Buchung{
+    -anreisedatum: LocalDate
+    -abreisedatum: LocalDate
+    -parketAnzahl: int
+}
+
+class Buchungsverteilung{
+    -buchung: Buchung
+    -hotelzimmer: Hotelzimmer
+}
+
+class Mitarbeiterverteilung{
+    -mitarbeiter: Mitarbeiter
+    -hotelzimmer: Hotelzimmer
+}
+
+class Leistungspaket{
+    -bezeichung: string
+    -preis: double
+}
+
+class Luxuspaket{
+
+
+}
+
+class Paketverteilung{
+    -leistungspaket: Leistungspaket
+    -mitarbeiter: Mitarbeiter
+}
+
+
+Buchung "*" -l-> "1" Gast
+Hotelzimmer "*" -- "*" Buchung
+(Hotelzimmer, Buchung) .. Buchungsverteilung
+Raumpfleger "0..1" -- "1" Mitarbeiter
+Betreuer "0..1" -r- "1" Mitarbeiter
+Mitarbeiter "*" -r- "*" Hotelzimmer
+(Mitarbeiter, Hotelzimmer) .. Mitarbeiterverteilung
+Betreuer "*" -l-> "1" Fachgebiet
+Hotelzimmer "*" -r-> "1" Kategorie
+Buchung "1" <-- "*" Leistungspaket
+Leistungspaket "*" -l- "*" Mitarbeiter
+(Leistungspaket, Mitarbeiter) .. Paketverteilung
+Luxuspaket "0..1" -- "*" Leistungspaket
+
+@enduml
