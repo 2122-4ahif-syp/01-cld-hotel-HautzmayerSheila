@@ -13,11 +13,14 @@ ifdef::backend-html5[]
 
 // print the toc here (not at the default position)
 //toc::[]
+== Hotel
 
 [plantuml,align=left]
 ----
 include::plantuml/Hotel.puml[]
 ----
+
+== Kino
 
 [plantuml,align=left]
 ----
