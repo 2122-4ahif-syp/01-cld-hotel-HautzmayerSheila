@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Saal{
+    -kino:Kino
+}
+
+class Reihe{
+    -saal: Saal
+}
+
+class Sitz{
+    -reihe: Reihe
+    -platz: int
+}
+
+class Preis{
+    -reihe: Reihe
+    -vorstellung: Vorstellung
+}
+
+class Vorstellung{
+    -film: Film
+}
+
+class Person{
+    -name: string
+    -nationalität: string
+    -dob: LocalDate
+    -dod: LocalDate
+    -bemerkung: string
+}
+
+class Film{
+    -genre: Genre
+}
+
+class Engagement{
+    -film: Film
+    -person: Person
+    -rolle: Rolle
+}
+
+class Rolle{
+
+}
+
+class Genre{
+
+}
+
+class Kino{
+    -stadt: string
+}
+
+class Karte{
+    -vorstellung: Vorstellung
+    -sitz: SItz
+}
+
+Saal "*" -l-> "1" Kino
+Saal "1" <--r "*" Reihe
+Reihe "1" <-r- "*" Sitz
+Genre "1" <-- "*" Film
+Film "1" <-- "*" Vorstellung
+Saal "1" <-- "*" Vorstellung
+Reihe "1" <-- "*" Preis
+Preis "*" --> "1" Vorstellung
+Karte "*" -l-> "1" Sitz
+Karte "*" -- "1" Vorstellung
+Film "*" -- "*" Person
+(Film, Person) .. Engagement
+Engagement "*" -- "1" Rolle
+
+
+
+
+@enduml
